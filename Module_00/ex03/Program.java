@@ -6,7 +6,8 @@ public class Program {
         String input = in.nextLine();
         StringBuilder sb = new StringBuilder();
         int weekIndex = 1;
-        String s;
+        int grade, min;
+        String res;
 
         while (weekIndex <= 18 && !input.equals("42")) {
             if (!input.equals("Week " + weekIndex)) {
@@ -15,15 +16,27 @@ public class Program {
             }
             sb.append(input).append(" ");
 
-//            input = in.nextLine();
-//            for(int i = 0; i < 9; i += 2) {
-//                int n = (int) input[i];
-//            }
+            min = 9;
+            for(int i = 0; i < 5; i++) {
+                grade = in.nextInt();
+                if (grade < min) {
+                    min = grade;
+                }
+            }
+            input = in.nextLine();
 
+            for (int i = 0; i < min; i++) {
+                sb.append("=");
+            }
+            sb.append(">\n");
 
             weekIndex++;
-            input = in.nextLine();
+            if (weekIndex <= 18){
+                input = in.nextLine();
+            }
         }
-//            System.out.println("hh"+ sb);
+
+        res = sb.toString();
+        System.out.println(res);
     }
 }
