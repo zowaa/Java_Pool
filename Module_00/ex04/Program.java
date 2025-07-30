@@ -1,4 +1,3 @@
-package Module_00.ex04;
 import java.util.Scanner;
 
 public class Program {
@@ -7,74 +6,61 @@ public class Program {
         String line = in.nextLine();
 
         char[] line_t = line.toCharArray();
-        char[] C = new char[line.length()];
-        int[] O = new int[line.length()];
+        char[] char_T = new char[line.length()];
+        int[] occurr_count = new int[line.length()];
         int size;
 
-        size = count_occurrences(line_t, C, O);
+        size = count_occurrences(line_t, char_T, occurr_count);
+        sort_occurrences(size, char_T, occurr_count);
 
 
-        for (int i = 0; i < size; i++){
-            System.out.print(C[i] + "  ");
-        }
-        System.out.println("");
-        for (int i = 0; i < size; i++){
-            System.out.print(O[i] + " ");
-        }
-        System.out.println("");
-        System.out.println(size);
-
-        sort_occurrences(size, C, O);
-
-
-        for (int i = 0; i < size; i++){
-            System.out.print(C[i] + "  ");
-        }
-        System.out.println("");
-        for (int i = 0; i < size; i++){
-            System.out.print(O[i] + " ");
-        }
-        System.out.println("");
-        System.out.println(size);
+//        for (int i = 0; i < size; i++){
+//            System.out.print(char_T[i] + "  ");
+//        }
+//        System.out.println("");
+//        for (int i = 0; i < size; i++){
+//            System.out.print(occurr_count[i] + " ");
+//        }
+//        System.out.println("");
     }
 
-    static void sort_occurrences(int size, char[] C, int[] O) {
-        int temp;
-        char tem;
+    static void sort_occurrences(int size, char[] char_T, int[] occurr_count) {
+        int tmp_int;
+        char tmp_char;
 
         for (int i = 0; i < size - 1; i++){
             for (int j = i + 1; j < size; j++) {
-                if (O[i] < O[j] || (O[i] == O[j] && C[i] > C[j])){
-                    temp = O[i];
-                    O[i] = O[j];
-                    O[j] = temp;
-                    tem = C[i];
-                    C[i] = C[j];
-                    C[j] = tem;
+                if (occurr_count[i] < occurr_count[j] || (occurr_count[i] == occurr_count[j] && char_T[i] > char_T[j])){
+                    tmp_int = occurr_count[i];
+                    occurr_count[i] = occurr_count[j];
+                    occurr_count[j] = tmp_int;
+                    tmp_char = char_T[i];
+                    char_T[i] = char_T[j];
+                    char_T[j] = tmp_char;
                 }
             }
         }
     }
 
-    static int count_occurrences(char[] line_t, char[] C, int[] O) {
-        boolean found = false;
+    static int count_occurrences(char[] line_t, char[] char_T, int[] occurr_count) {
+        boolean found;
         int j;
         int size = 0;
 
         for (char c: line_t){
             found = false;
             for (j = 0; j < size; j++){
-                if (C[j] == c){
-                    if (O[j] < 999) {
-                        O[j] += 1;
+                if (char_T[j] == c){
+                    if (occurr_count[j] < 999) {
+                        occurr_count[j] += 1;
                     }
                     found = true;
                     break;
                 }
             }
             if (!found){
-                C[j] = c;
-                O[j] = 1;
+                char_T[j] = c;
+                occurr_count[j] = 1;
                 size++;
             }
         }
